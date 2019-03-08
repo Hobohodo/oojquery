@@ -60,7 +60,7 @@ input#new-task {
   padding: 20px 5px;
   border-bottom: 1px solid #eee;
   font-size: 18px;
-  align-items: baseline;
+  align-items: center;
 }
 .task-item > .delete:hover {
   color: #CF2323;

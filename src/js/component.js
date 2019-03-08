@@ -13,16 +13,16 @@ let ToDoList = function(name) {
   /** @param {{Element}} */
   this.list = this.el.querySelector('.task-list');
 
-  this.addTask = function() {
-    let instance = this;
-
-    if (instance.input.value.length == 0) {
-      return alert('no task entered into todo list');
+  this.addTask = function(entry) {
+    if (entry.length > 0 && typeof entry != 'undefined') {
+      let taskItem = this.createTaskElement(entry);
+      this.list.appendChild(taskItem);
     }
+  };
 
-    instance.list.appendChild(instance.createTaskElement(instance.input.value));
-
-    instance.input.value = null;
+  this.addTaskFromInput = function() {
+    this.addTask(this.input.value);
+    this.input.value = null;
   };
 
   this.initEventListeners = function() {
@@ -30,12 +30,12 @@ let ToDoList = function(name) {
 
     instance.addButton.addEventListener('click', function(e) {
       e.preventDefault();
-      instance.addTask();
+      instance.addTaskFromInput();
     });
     instance.input.addEventListener('keyup', function(e) {
       e.preventDefault();
       if (e.keyCode === 13) {
-        instance.addTask();
+        instance.addTaskFromInput();
       }
     });
 
