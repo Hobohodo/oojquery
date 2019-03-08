@@ -37,6 +37,14 @@ let ToDoList = function(name) {
         instance.addTask();
       }
     });
+
+    instance.list.addEventListener('click', function(e) {
+      if(e.target.matches('.delete > *')) {
+        instance.deleteTask(e.target.closest('.task-item'));
+      } else if(e.target.matches('.task-item')) {
+        instance.toggleCompleted(e.target);
+      }
+    });
   };
 
   this.init = function() {
@@ -52,6 +60,7 @@ let ToDoList = function(name) {
  */
 ToDoList.prototype.createTaskElement = function(entry) {
   let listItem = document.createElement('li');
+  listItem.classList.add('task-item');
   listItem.innerText = entry;
 
   var deleteSpan = document.createElement('span');
@@ -64,4 +73,13 @@ ToDoList.prototype.createTaskElement = function(entry) {
   deleteSpan.appendChild(deleteIcon);
 
   return listItem;
+};
+
+ToDoList.prototype.deleteTask = function(taskItem) {
+  let containingList = taskItem.closest('.task-list');
+  containingList.removeChild(taskItem);
+};
+
+ToDoList.prototype.toggleCompleted = function(taskItem) {
+  taskItem.classList.toggle('completed');
 };
