@@ -1,5 +1,6 @@
-let ToDoList = function(name) {
+'use strict';
 
+let ToDoList = function(name) {
   /** @param {{Element}} */
   this.el = document.querySelector(`[data-list=${name}]`);
 
@@ -15,7 +16,7 @@ let ToDoList = function(name) {
   this.addTask = function() {
     let instance = this;
 
-    if(instance.input.value.length == 0) {
+    if (instance.input.value.length == 0) {
       return alert('no task entered into todo list');
     }
 
@@ -26,12 +27,12 @@ let ToDoList = function(name) {
 
   this.initEventListeners = function() {
     let instance = this;
-  
+
     instance.addButton.addEventListener('click', function(e) {
       e.preventDefault();
       instance.addTask();
     });
-    instance.input.addEventListener('keyup', function (e) {
+    instance.input.addEventListener('keyup', function(e) {
       e.preventDefault();
       if (e.keyCode === 13) {
         instance.addTask();
@@ -39,9 +40,9 @@ let ToDoList = function(name) {
     });
 
     instance.list.addEventListener('click', function(e) {
-      if(e.target.matches('.delete > *')) {
+      if (e.target.matches('.delete > *')) {
         instance.deleteTask(e.target.closest('.task-item'));
-      } else if(e.target.matches('.task-item')) {
+      } else if (e.target.matches('.task-item')) {
         instance.toggleCompleted(e.target);
       }
     });
@@ -50,7 +51,6 @@ let ToDoList = function(name) {
   this.init = function() {
     this.initEventListeners();
   };
-
 };
 
 /**

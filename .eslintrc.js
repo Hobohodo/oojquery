@@ -11,6 +11,7 @@ module.exports = {
     },
     "rules": {
         "no-console": "off",
+        "no-unused-vars": 1,
         "indent": [
             "error",
             2
