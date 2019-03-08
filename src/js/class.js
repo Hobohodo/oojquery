@@ -17,12 +17,16 @@ class ToDoList {
     this.initEventListeners();
   }
 
-  addTask() {
-    let instance = this;
-    if (instance.input.value.length == 0) {
-      return alert('no task entered into todo list');
+  addTask(entry) {
+    if (entry.length > 0 && typeof entry != 'undefined') {
+      let taskItem = this.createTaskElement(entry);
+      this.list.appendChild(taskItem);
     }
-    instance.list.appendChild(instance.createTaskElement(instance.input.value));
+  }
+
+  addTaskFromInput() {
+    let instance = this;
+    instance.addTask(instance.input.value);
     instance.input.value = null;
   }
 
@@ -30,12 +34,12 @@ class ToDoList {
     let instance = this;
     instance.addButton.addEventListener('click', function (e) {
       e.preventDefault();
-      instance.addTask();
+      instance.addTaskFromInput();
     });
     instance.input.addEventListener('keyup', function (e) {
       e.preventDefault();
       if (e.keyCode === 13) {
-        instance.addTask();
+        instance.addTaskFromInput();
       }
     });
     instance.list.addEventListener('click', function (e) {
@@ -52,10 +56,12 @@ class ToDoList {
     let listItem = document.createElement('li');
     listItem.classList.add('task-item');
     listItem.innerText = entry;
+    
     var deleteSpan = document.createElement('span');
     deleteSpan.className = 'delete';
     var deleteIcon = document.createElement('i');
     deleteIcon.classList.add('fas', 'fa-trash');
+
     listItem.appendChild(deleteSpan);
     deleteSpan.appendChild(deleteIcon);
 
