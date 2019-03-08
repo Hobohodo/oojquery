@@ -18,7 +18,7 @@ let ToDoList = function(name) {
     let instance = this;
 
     if(instance.input.value.length == 0) {
-      alert('no task entered into todo list');
+      return alert('no task entered into todo list');
     }
 
     instance.list.appendChild(instance.createTaskElement(instance.input.value));
