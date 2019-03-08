@@ -1,5 +1,3 @@
-var $;
-
 let ToDoList = function(name) {
 
   /** @param {{Element}} */
@@ -67,7 +65,3 @@ ToDoList.prototype.createTaskElement = function(entry) {
 
   return listItem;
 };
-
-$(document).ready(function() {
-  new ToDoList('existing').init();
-});
