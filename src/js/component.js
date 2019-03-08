@@ -11,7 +11,7 @@ let ToDoList = function(element) {
   this.list = this.el.find('.task-list');
 
   this.addTask = function(taskEntry) {
-
+    
   }
 
 };
