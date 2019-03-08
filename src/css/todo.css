@@ -1,6 +1,6 @@
 /* Basic Style */
 body {
-  background: #fff;
+  background: #f9f9f9;
   color: #333;
   font-family: Lato, sans-serif;
 }
@@ -13,28 +13,18 @@ ul {
   margin: 0;
   padding: 0;
 }
-li * {
-  float: left;
-}
-li, h3 {
-  clear:both;
-  list-style:none;
-}
 input, button {
   outline: none;
 }
 button {
   background: none;
   border: 0px;
-  color: #888;
+  color: #333;
   font-size: 15px;
   width: 60px;
   margin: 10px 0 0;
   font-family: Lato, sans-serif;
   cursor: pointer;
-}
-button:hover {
-  color: #333;
 }
 /* Heading */
 h3 {
@@ -61,7 +51,7 @@ input#new-task {
 }
 
 /* Task list */
-li {
+.task-item {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -72,26 +62,13 @@ li {
   font-size: 18px;
   align-items: baseline;
 }
-li > .delete:hover {
+.task-item > .delete:hover {
   color: #CF2323;
   cursor: pointer;
 }
 
 /* Completed */
-li.completed {
+.task-item.completed {
   text-decoration: line-through;
   color: #888;
-}
-
-/* Edit Task */
-ul li input[type=text] {
-  display:none;
-}
-
-ul li.editMode input[type=text] {
-  display:block;
-}
-
-ul li.editMode label {
-  display:none;
 }
