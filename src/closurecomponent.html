@@ -1,0 +1,57 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/todo.css">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<!-- Add your site or application content here -->
+<div class="list-container" data-list="existing">
+
+  <h3><label for="new-task">Add Item</label></h3>
+  <section class="new-task">
+    <input id="new-task" type="text">
+    <button id="add-button">Add</button>
+  </section>
+
+  <h3>Todo</h3>
+  <ul class="task-list">
+    <li class="task-item">
+      Pay Bills
+      <span class="delete"><i class="fas fa-trash"></i></span>
+    </li>
+    <li class="task-item">
+      Go Shopping
+      <span class="delete"><i class="fas fa-trash"></i></span>
+    </li>
+
+  </ul>
+</div>
+
+<script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script>
+<script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js" integrity="{{JQUERY_SRI_HASH}}"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
+<script src="js/plugins.js"></script>
+<script src="js/closurecomponent.js"></script>
+<script>
+  var existingList = components.toDoList('existing');
+</script>
+</body>
+
+</html>

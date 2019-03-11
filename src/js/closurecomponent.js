@@ -1,4 +1,4 @@
-const components = components || {};
+const components = {};
 
 components.toDoList = (function(name) {
   'use strict';
@@ -19,6 +19,30 @@ components.toDoList = (function(name) {
 
     return listItem;
   };
+
+  function initList(name) {
+    let list = new ToDoList(name);
+
+    list.addButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      list.addTaskFromInput();
+    });
+    list.input.addEventListener('keyup', function(e) {
+      e.preventDefault();
+      if (e.keyCode === 13) {
+        list.addTaskFromInput();
+      }
+    });
+
+    list.list.addEventListener('click', function(e) {
+      if (e.target.matches('.delete > *')) {
+        list.deleteTask(e.target.closest('.task-item'));
+      } else if (e.target.matches('.task-item')) {
+        list.toggleCompleted(e.target);
+      }
+    });
+    return list;
+  }
 
   let ToDoList = function(name) {
     /** @param {{Element}} */
@@ -45,50 +69,6 @@ components.toDoList = (function(name) {
       this.input.value = null;
     };
 
-    this.initEventListeners = function() {
-      let instance = this;
-  
-      instance.addButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        instance.addTaskFromInput();
-      });
-      instance.input.addEventListener('keyup', function(e) {
-        e.preventDefault();
-        if (e.keyCode === 13) {
-          instance.addTaskFromInput();
-        }
-      });
-  
-      instance.list.addEventListener('click', function(e) {
-        if (e.target.matches('.delete > *')) {
-          instance.deleteTask(e.target.closest('.task-item'));
-        } else if (e.target.matches('.task-item')) {
-          instance.toggleCompleted(e.target);
-        }
-      });
-    };
-  
-    this.init = function() {
-      this.initEventListeners();
-    };
-
-  };
-
-  ToDoList.prototype.createTaskElement = function(entry) {
-    let listItem = document.createElement('li');
-    listItem.classList.add('task-item');
-    listItem.innerText = entry;
-  
-    var deleteSpan = document.createElement('span');
-    deleteSpan.className = 'delete';
-  
-    var deleteIcon = document.createElement('i');
-    deleteIcon.classList.add('fas', 'fa-trash');
-  
-    listItem.appendChild(deleteSpan);
-    deleteSpan.appendChild(deleteIcon);
-  
-    return listItem;
   };
   
   ToDoList.prototype.deleteTask = function(taskItem) {
@@ -100,5 +80,7 @@ components.toDoList = (function(name) {
     taskItem.classList.toggle('completed');
   };
 
-  return new ToDoList(name).init();
+  return function(name) {
+    return initList(name);
+  };
 })();
