@@ -1,6 +1,6 @@
 const components = {};
 
-components.toDoList = (function(name) {
+components.toDoList = (function() {
   'use strict';
 
   let _createTaskElement = function(entry) {
