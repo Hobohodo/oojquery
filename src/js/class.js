@@ -1,6 +1,14 @@
 'use strict';
 
+/**
+ * This constant isn't exported and so can't be accessed from outside.
+ * @type {{createTaskElement(string): HTMLElement}}
+ */
 const privateMethods = {
+  /**
+   * @param entry {string}
+   * @returns {HTMLElement}
+   */
   createTaskElement(entry) {
     let listItem = document.createElement('li');
     listItem.classList.add('task-item');
@@ -18,7 +26,9 @@ const privateMethods = {
   }
 };
 
+
 class ToDoList {
+
   constructor(name) {
     /** @param {{Element}} */
     this.el = document.querySelector(`[data-list=${name}]`);
@@ -49,6 +59,9 @@ class ToDoList {
     instance.input.value = null;
   }
 
+  /**
+   * This method should probably be private, it's not needed by users of the ToDoList
+   */
   initEventListeners() {
     let instance = this;
     instance.addButton.addEventListener('click', function (e) {

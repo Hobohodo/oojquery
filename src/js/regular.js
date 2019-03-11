@@ -1,12 +1,20 @@
 
 var $;
-
+//only run after document is loaded
 $(document).ready(function () {
+  //input elements, used to add tasks below
   var taskInput = document.getElementById('new-task');
   var addButton = document.getElementById('add-button');
-  var incompleteTaskHolder = document.getElementById('incomplete-tasks');//ul of #incomplete-tasks
+
+  //Where the tasks live, used to assign complete/delete event handlers
+  var incompleteTaskHolder = document.getElementById('incomplete-tasks');
 
 
+  /**
+   * This method isn't needed by the page, can we make it private?
+   * @param entry {string}
+   * @returns {HTMLElement}
+   */
   var createTaskElement = function (entry) {
     var listItem = document.createElement('li');
     listItem.classList.add('task-item');
@@ -25,10 +33,12 @@ $(document).ready(function () {
   };
 
 
+  /**
+   * Move the value from the task input to the list and clear the input
+   */
   var addTask = function () {
     var listItem = createTaskElement(taskInput.value);
 
-    //Append listItem to incompleteTaskHolder
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem);
 
@@ -36,12 +46,12 @@ $(document).ready(function () {
   };
 
   var deleteTask = function (event) {
-    //Prevent any other event from firing
+    //Prevent the normal toggleComplete event from firing
     event.stopPropagation();
 
     var listItem = this.parentNode;
     var ul = listItem.parentNode;
-    //Remove the parent list item from the ul.
+
     ul.removeChild(listItem);
   };
 
@@ -49,6 +59,9 @@ $(document).ready(function () {
     e.preventDefault();
     addTask();
   });
+  /**
+   * Fire event when 'enter' is pressed
+   */
   taskInput.addEventListener('keyup', function (e) {
     e.preventDefault();
     if (e.keyCode === 13) {
@@ -58,10 +71,9 @@ $(document).ready(function () {
 
 
   var bindTaskEvents = function (taskListItem) {
-    console.log('bind list item events for item with ' + taskListItem.innerText);
     var deleteButton = taskListItem.querySelector('span.delete');
 
-    //toggling completed
+    //change completed status
     taskListItem.addEventListener('click', function(event) {
       event.target.classList.toggle('completed');
     });
@@ -70,10 +82,8 @@ $(document).ready(function () {
     deleteButton.addEventListener('click', deleteTask);
   };
 
-  //cycle over incompleteTaskHolder ul list items
-  //for each list item
+  //add events to tasks that exist on page load
   for (var i = 0; i < incompleteTaskHolder.children.length; i++) {
-    //bind events to list items chldren(tasksCompleted)
     bindTaskEvents(incompleteTaskHolder.children[i]);
   }
 });

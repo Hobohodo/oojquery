@@ -13,6 +13,10 @@ let ToDoList = function(name) {
   /** @param {{Element}} */
   this.list = this.el.querySelector('.task-list');
 
+  /**
+   * Add a task to the list
+   * @param entry {string}
+   */
   this.addTask = function(entry) {
     if (entry.length > 0 && typeof entry != 'undefined') {
       let taskItem = this.createTaskElement(entry);
@@ -20,10 +24,14 @@ let ToDoList = function(name) {
     }
   };
 
+  /**
+   * Clear the value from the input and add it to the list
+   */
   this.addTaskFromInput = function() {
     this.addTask(this.input.value);
     this.input.value = null;
   };
+
 
   this.initEventListeners = function() {
     let instance = this;
@@ -39,6 +47,9 @@ let ToDoList = function(name) {
       }
     });
 
+    /**
+     * Use delegated events to avoid refreshing them every time the list content changes.
+     */
     instance.list.addEventListener('click', function(e) {
       if (e.target.matches('.delete > *')) {
         instance.deleteTask(e.target.closest('.task-item'));

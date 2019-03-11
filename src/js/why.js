@@ -17,6 +17,11 @@ const privateMethods = {
     return listItem;
   },
 
+  /**
+   * This method takes a string and naively tries to create a bunch of html. Private because it's bad.
+   * @param name {string}
+   * @returns {HTMLElement}
+   */
   render(name) {
     let container = document.createElement('section');
     container.classList.add('list-container');
@@ -37,11 +42,11 @@ const privateMethods = {
 
 class ToDoList {
   constructor(name) {
-    //if element doesn't exist, create a new one then set this data.
 
     /** @param {{Element}} */
     this.el = document.querySelector(`[data-list=${name}]`);
 
+    //This check is naive and done to show an example of rendering html from js.
     if(this.el == null) {
       document.querySelector('body').append(privateMethods.render(name));
       this.el = document.querySelector(`[data-list=${name}]`);
@@ -104,6 +109,12 @@ class ToDoList {
   }
 }
 
+/**
+ * There is no export for this file because the consuming html page needs to be able to create ToDoLists
+ * and I don't know how to do that using the module Import on such short notice.
+ * @param name
+ * @returns {ToDoList}
+ */
 function createToDoList(name) {
   return new ToDoList(name);
 }

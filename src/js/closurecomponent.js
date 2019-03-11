@@ -3,6 +3,12 @@ const components = {};
 components.toDoList = (function() {
   'use strict';
 
+  /**
+   *
+   * @param entry {string}
+   * @returns {HTMLElement}
+   * @private
+   */
   let _createTaskElement = function(entry) {
     let listItem = document.createElement('li');
     listItem.classList.add('task-item');
@@ -20,7 +26,12 @@ components.toDoList = (function() {
     return listItem;
   };
 
-  //The effective constructor. Event listeners are assigned here because you shouldn't call them again.
+  /**
+   * Constructor. This sets the event listeners to avoid accidental duplication.
+   * @param name {string}
+   * @returns {ToDoList}
+   * @private
+   */
   function _initList(name) {
     let list = new ToDoList(name);
 
@@ -58,6 +69,10 @@ components.toDoList = (function() {
     /** @param {{Element}} */
     this.list = this.el.querySelector('.task-list');
 
+    /**
+     * Add a task to the list
+     * @param entry {string}
+     */
     this.addTask = function(entry) {
       if (entry.length > 0 && typeof entry != 'undefined') {
         let taskItem = _createTaskElement(entry);
@@ -65,6 +80,7 @@ components.toDoList = (function() {
       }
     };
 
+    /** Clear the value from the input and add it to the list */
     this.addTaskFromInput = function() {
       this.addTask(this.input.value);
       this.input.value = null;
