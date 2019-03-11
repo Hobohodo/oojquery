@@ -1,12 +1,7 @@
 const components = components || {};
-var $;
 
 components.toDoList = (function(name) {
   'use strict';
-
-  let defaultOptions = {
-    name: '',
-  };
 
   let _createTaskElement = function(entry) {
     let listItem = document.createElement('li');
