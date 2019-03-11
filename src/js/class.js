@@ -32,6 +32,7 @@ class ToDoList {
     /** @param {{Element}} */
     this.list = this.el.querySelector('.task-list');
 
+    //regression, event listener assigning is public
     this.initEventListeners();
   }
 

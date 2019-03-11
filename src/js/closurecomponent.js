@@ -20,6 +20,7 @@ components.toDoList = (function() {
     return listItem;
   };
 
+  //The effective constructor. Event listeners are assigned here because you shouldn't call them again.
   function _initList(name) {
     let list = new ToDoList(name);
 
