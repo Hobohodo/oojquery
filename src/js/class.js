@@ -1,5 +1,23 @@
 'use strict';
 
+const privateMethods = {
+  createTaskElement(entry) {
+    let listItem = document.createElement('li');
+    listItem.classList.add('task-item');
+    listItem.innerText = entry;
+
+    var deleteSpan = document.createElement('span');
+    deleteSpan.className = 'delete';
+    var deleteIcon = document.createElement('i');
+    deleteIcon.classList.add('fas', 'fa-trash');
+
+    listItem.appendChild(deleteSpan);
+    deleteSpan.appendChild(deleteIcon);
+
+    return listItem;
+  }
+};
+
 class ToDoList {
   constructor(name) {
     /** @param {{Element}} */
@@ -19,7 +37,7 @@ class ToDoList {
 
   addTask(entry) {
     if (entry.length > 0 && typeof entry != 'undefined') {
-      let taskItem = this.createTaskElement(entry);
+      let taskItem = privateMethods.createTaskElement(entry);
       this.list.appendChild(taskItem);
     }
   }
@@ -50,22 +68,6 @@ class ToDoList {
         instance.toggleCompleted(e.target);
       }
     });
-  }
-
-  createTaskElement(entry) {
-    let listItem = document.createElement('li');
-    listItem.classList.add('task-item');
-    listItem.innerText = entry;
-    
-    var deleteSpan = document.createElement('span');
-    deleteSpan.className = 'delete';
-    var deleteIcon = document.createElement('i');
-    deleteIcon.classList.add('fas', 'fa-trash');
-
-    listItem.appendChild(deleteSpan);
-    deleteSpan.appendChild(deleteIcon);
-
-    return listItem;
   }
 
   deleteTask(taskItem) {

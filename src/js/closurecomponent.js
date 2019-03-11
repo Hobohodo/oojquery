@@ -20,7 +20,7 @@ components.toDoList = (function(name) {
     return listItem;
   };
 
-  function initList(name) {
+  function _initList(name) {
     let list = new ToDoList(name);
 
     list.addButton.addEventListener('click', function(e) {
@@ -81,6 +81,6 @@ components.toDoList = (function(name) {
   };
 
   return function(name) {
-    return initList(name);
+    return _initList(name);
   };
 })();
