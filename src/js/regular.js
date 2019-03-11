@@ -9,6 +9,7 @@ $(document).ready(function () {
 
   var createTaskElement = function (entry) {
     var listItem = document.createElement('li');
+    listItem.classList.add('task-item');
     listItem.innerText = entry;
 
     var deleteSpan = document.createElement('span');
